@@ -6,14 +6,15 @@ import java.util.List;
 import javafx.scene.shape.Box;
 import javafx.scene.shape.DrawMode;
 import javafx.scene.shape.MeshView;
+import javafx.scene.shape.Shape3D;
 import javafx.scene.shape.TriangleMesh;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 
 public class BoardLoader {
-	private final List<Box> mBoxDevs;
-	private final List<Box> mBoxPins;
+	private final List<Shape3D> mBoxDevs;
+	private final List<Shape3D> mBoxPins;
 
 	public BoardLoader() {
 		mBoxPins = new ArrayList<>();
@@ -45,6 +46,38 @@ public class BoardLoader {
 				mBoxPins.add(pin);
 			}
 		}
+
+		APoint2D[] pathPoly = new APoint2D[] {
+		// @formatter:off
+				new APoint2D(5, -1), new APoint2D(5, -1 + 20),
+				new APoint2D(5 - 2, 19), new APoint2D(3, 19 - 18),
+				new APoint2D(3 - 8, 1), new APoint2D(-5, 1 - 20),
+				new APoint2D(-5 + 2, -19), new APoint2D(-3, -19 + 18),
+		// @formatter:on
+		};
+
+		APoint2D[] triPoly = new APoint2D[] {
+				// @formatter:off
+						new APoint2D(5, 5), new APoint2D(0, 0),
+						new APoint2D(-5, 5), new APoint2D(-5, -5),
+						new APoint2D(5, -5)
+				// @formatter:on
+				};
+		MeshView testPin = new MeshView(new AExtrudedShape(pathPoly, 2));
+		testPin.setTranslateX(20 + 10);
+		testPin.setTranslateY(20 + 10);
+		testPin.setTranslateZ(- 2 - 10);
+		testPin.setMaterial(pinMaterial);
+		testPin.setDrawMode(DrawMode.FILL);
+		mBoxPins.add(testPin);
+
+		testPin = new MeshView(new AExtrudedShape(triPoly, 2));
+		testPin.setTranslateX(-20 + 10);
+		testPin.setTranslateY(20 + 10);
+		testPin.setTranslateZ(-2 - 10);
+		testPin.setMaterial(pinMaterial);
+		testPin.setDrawMode(DrawMode.FILL);
+		mBoxPins.add(testPin);
 
 		Box pkg = new Box(100, 100, 10);
 		pkg.setTranslateZ(-10 / 2);
@@ -78,15 +111,9 @@ public class BoardLoader {
 
 	public MeshView createOctagonView(double r, double height) {
 		// @formatter:off
-		float[] points = {
-			50, 0, 0,
-			45, 10, 0,
-			55, 10, 0};
+		float[] points = { 50, 0, 0, 45, 10, 0, 55, 10, 0 };
 
-		float[] texCoords = {
-			0.5f, 0.5f,
-			0.0f, 1.0f,
-			1.0f, 1.0f};
+		float[] texCoords = { 0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f };
 
 		int[] faces = { 0, 0, 2, 2, 1, 1, 0, 0, 1, 1, 2, 2 };
 		// @formatter:on

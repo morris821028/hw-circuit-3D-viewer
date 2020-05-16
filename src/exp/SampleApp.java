@@ -45,7 +45,7 @@ public class SampleApp extends Application {
 
 		// Build the Scene Graph
 		world.getChildren().add(camera);
-		buildAxes();
+//		buildAxes();
 		board.load(world);
 
 		// Use a SubScene
