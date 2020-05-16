@@ -69,7 +69,6 @@ public class PolygonTriangulation {
 				if (ear[i])
 					break;
 				i = r[i];
-				System.out.printf("%d\n", i);
 			}
 
 			ret.add(new ATriple<>(l[i], i, r[i]));
