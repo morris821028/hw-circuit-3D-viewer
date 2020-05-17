@@ -16,4 +16,9 @@ public class APoint2D {
 	APoint2D sub(APoint2D pt) {
 		return new APoint2D(x - pt.x, y - pt.y);
 	}
+
+	@Override
+	public String toString() {
+		return String.format("(%d, %d)", x, y);
+	}
 }

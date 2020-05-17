@@ -40,7 +40,7 @@ public class BoardLoader {
 				pin.setTranslateX(i * 20);
 				pin.setTranslateY(j * 20);
 				pin.setTranslateZ(-2 / 2 - 10);
-				pin.setDrawMode(DrawMode.FILL);
+				pin.setDrawMode(DrawMode.LINE);
 
 				pin.setMaterial(pinMaterial);
 				mBoxPins.add(pin);
@@ -58,17 +58,28 @@ public class BoardLoader {
 
 		APoint2D[] triPoly = new APoint2D[] {
 				// @formatter:off
-						new APoint2D(5, 5), new APoint2D(0, 0),
+						new APoint2D(0, 0),
 						new APoint2D(-5, 5), new APoint2D(-5, -5),
-						new APoint2D(5, -5)
+						new APoint2D(5, -5), new APoint2D(5, 5)
 				// @formatter:on
 				};
-		MeshView testPin = new MeshView(new AExtrudedShape(pathPoly, 2));
+
+		APoint2D[] ladderPoly = new APoint2D[] {
+				// @formatter:off
+						new APoint2D(3, 0), new APoint2D(3, 3),
+						new APoint2D(2, 3), new APoint2D(2, 2),
+						new APoint2D(1, 2), new APoint2D(1, 1),
+						new APoint2D(0, 1),
+						new APoint2D(0, 0),
+				// @formatter:on
+				};
+		MeshView testPin;
+		testPin = new MeshView(new AExtrudedShape(pathPoly, 2));
 		testPin.setTranslateX(20 + 10);
 		testPin.setTranslateY(20 + 10);
 		testPin.setTranslateZ(- 2 - 10);
 		testPin.setMaterial(pinMaterial);
-		testPin.setDrawMode(DrawMode.FILL);
+		testPin.setDrawMode(DrawMode.LINE);
 		mBoxPins.add(testPin);
 
 		testPin = new MeshView(new AExtrudedShape(triPoly, 2));
@@ -76,7 +87,15 @@ public class BoardLoader {
 		testPin.setTranslateY(20 + 10);
 		testPin.setTranslateZ(-2 - 10);
 		testPin.setMaterial(pinMaterial);
-		testPin.setDrawMode(DrawMode.FILL);
+		testPin.setDrawMode(DrawMode.LINE);
+		mBoxPins.add(testPin);
+
+		testPin = new MeshView(new AExtrudedShape(ladderPoly, 2));
+		testPin.setTranslateX(-20 + 10);
+		testPin.setTranslateY(-10 + 10);
+		testPin.setTranslateZ(-2 - 10);
+		testPin.setMaterial(pinMaterial);
+		testPin.setDrawMode(DrawMode.LINE);
 		mBoxPins.add(testPin);
 
 		Box pkg = new Box(100, 100, 10);
@@ -92,8 +111,8 @@ public class BoardLoader {
 		dieB.setTranslateZ(-6 / 2 - 2 - 10);
 		dieB.setMaterial(dieMaterial);
 		mBoxDevs.add(pkg);
-		mBoxDevs.add(dieA);
-		mBoxDevs.add(dieB);
+//		mBoxDevs.add(dieA);
+//		mBoxDevs.add(dieB);
 	}
 
 	public void load(Group sc) {
